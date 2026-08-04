@@ -5,7 +5,7 @@
 https://github.com/voki-kononenko-a/FullStack-QA-with-Python-AI/tree/studies/develop
 
 Запуск файла (перед этим ОБЯЗАТЕЛЬНО сохранить):
-python python/lesson_01_basics.py
+python python/lesson_02_basics.py
 
 Команды для пушей:
 git add .  - добавляет все
@@ -29,4 +29,4 @@ git checkout main
 git pull origin main
 git checkout studies/develop
 
-Ctrl + L - прикрепление файла к промпту
+Ctrl + L - прикрепление файла (с привязкой к строкам) к промпту

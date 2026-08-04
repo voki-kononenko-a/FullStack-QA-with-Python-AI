@@ -29,4 +29,4 @@ git checkout main
 git pull origin main
 git checkout studies/develop
 
-Ctrl + L - прикрепление файла к промпту
+Ctrl + L - прикрепление файла (с привязкой к строкам) к промпту

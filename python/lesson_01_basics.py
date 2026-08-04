@@ -39,18 +39,20 @@ is_active = True
 if is_admin and is_active:
     print("Доступ к панели администратора разрешён")
 
-Calculated_progress = int(input("Введите текущий прогресс игрока: "))
+calculated_progress = int(input("Введите текущий прогресс игрока: "))
 
-if Calculated_progress == 50:
-    print(f"Normal {Calculated_progress}")
-elif Calculated_progress >= 51:
-    print(f"High_help {Calculated_progress}")
+if calculated_progress == 50:
+    print(f"Normal {calculated_progress}")
+elif calculated_progress >= 51:
+    print(f"High_help {calculated_progress}")
 else:
-    print(f"High_stop {Calculated_progress}")
+    print(f"High_stop {calculated_progress}")
 
-level = input ("Введите уровень игрока:")
+BONUS_LEVEL = "222"
 
-if level != "222":
-    print(f"Уровень", level, "не бонусный уровень")
+level = input("Введите уровень игрока:")
+
+if level != BONUS_LEVEL:
+    print(f"Уровень {level} не бонусный уровень")
 else:
-    print (f"Уровень", level, "является бонусным")
+    print(f"Уровень {level} является бонусным")

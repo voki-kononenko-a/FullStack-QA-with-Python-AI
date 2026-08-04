@@ -2,14 +2,17 @@ expected_bv_damage = 200
 actual_bv_damage = 200
 
 # Синтаксис: assert условие, "Сообщение при ошибке"
-assert expected_bv_damage == actual_bv_damage, f"Ожидался урон {expected_bv_damage}, но получен урон {actual_bv_damage}"
+assert expected_bv_damage == actual_bv_damage, (
+f"Ожидался урон {expected_bv_damage}," 
+f"но получен урон {actual_bv_damage}"
+)
 
 # Список уровней от нескольких эндпоинтов
-levels_number = [589, 14587, 222, 365]
+level_ids = [589, 14587, 222, 365]
 
 # Проверяем каждый уровень в цикле
-for status in levels_number:
-    assert status in [589, 14587, 222, 365], f"Обнаружен лишний уровень: {status}"
+for level in level_ids:
+    assert level in [589, 3, 222, 365], f"Обнаружен лишний уровень: {status}"
 
 # --- Тест 1: Проверка времени открытия окна ЛП ---
 window_load_times = [0.8, 1.2, 0.5, 1.9, 2.3]  # в секундах

@@ -23,3 +23,10 @@ git checkout -b studies/develop
 
 Переключение на существующую ветку:
 git checkout studies/develop
+
+Пул и возвращение на ветку:
+git checkout main
+git pull origin main
+git checkout studies/develop
+
+Ctrl + L - прикрепление файла к промпту

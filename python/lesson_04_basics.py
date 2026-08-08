@@ -1,18 +1,24 @@
 # --- 1. Объявление функций-хелперов ---
 
-def validate_response_time(response_time: float, max_limit: float = 2.0):
-# Хелпер проверяет, не превышает ли время ответа допустимый SLA.
+def validate_response_time(response_time: float, max_limit: float = 2.0) -> None:
+    """Хелпер проверяет, не превышает ли время ответа допустимый SLA."""
     assert response_time <= max_limit, f"Ошибка SLA: {response_time}s превышает лимит {max_limit}s"
 
 
 def is_user_active(user_data: dict) -> bool:
-# Хелпер проверяет активен ли пользователь, возвращая True или False.
+    """Хелпер проверяет активен ли пользователь, возвращая True или False."""
     return user_data.get("is_active", False)
 
 
 def get_user_id(user_data: dict) -> int:
-# Хелпер безопасно достает ID пользователя из словаря.
-    return user_data.get("id", 0)  # Если ключа "id" нет, вернет 0
+    """Хелпер безопасно достает ID пользователя из словаря."""
+    return user_data.get("id", None)  # Если ключа "id" нет, вернет 0
+# get_user_id возвращает 0 (стояло вместо None), если ключа нет — в реальных тестах 0 может скрыть баг (лучше None или явный raise)
+
+
+def get_user_role(response_data: dict) -> str:
+    """Безопасно достает роль из вложенного ответа API. Если роли нет, возвращает 'GUEST'."""
+    return response_data.get("data", {}).get("role", "GUEST")
 
 
 # --- 2. Вызов функций (Автотесты) ---
@@ -24,7 +30,7 @@ validate_response_time(1.4)
 test_user = {
     "id": 101,
     "email": "qa_lead@test.com",
-    "is_active": True  # для фикса автотеста необходимо поставить True
+    "is_active": False  # для фикса автотеста необходимо поставить True
 }
 
 # Функция вернет True, результат запишется в переменную status
@@ -33,16 +39,10 @@ user_id = get_user_id(test_user)
 goal_user_id = 101
 
 # Проверяем через assert, что status действительно равен True
-assert status is True, f"Ожидался активный пользователь, но получили {status}"
+assert status is True, f"Ожидался активный пользователь, но получили {status}"  # можно короче: assert status
 assert user_id == goal_user_id, f"Ожидался {test_user['id']}, но получили {goal_user_id}"
 
 print("Все проверки функций успешно пройдены!")
-
-
-
-def get_user_role(response_data: dict) -> str:
-# Безопасно достает роль из вложенного ответа API. Если роли нет, возвращает 'GUEST'.
-    return response_data.get("data", {}).get("role", "GUEST")
 
 
 # --- Автотест ---

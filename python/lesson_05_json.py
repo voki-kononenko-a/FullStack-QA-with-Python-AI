@@ -1,4 +1,5 @@
 import json
+from pathlib import Path
 
 # --- 1. Подготовка тестовых данных (Конфиг для тестов) ---
 data_to_save = {
@@ -8,7 +9,10 @@ data_to_save = {
     "debug_mode": True
 }
 
-file_name = "test_config.json"
+# file_name = "test_config.json"
+# .parent — кладет файл в папку python
+# .parent.parent — поднимется на уровень выше, чем python и положит файл в корень проекта qa-automation-course/
+file_name = Path(__file__).resolve().parent.parent / "test_config.json"
 
 # --- 2. Запись тестовых данных в JSON-файл ---
 with open(file_name, "w", encoding="utf-8") as file:
@@ -22,7 +26,10 @@ with open(file_name, "r", encoding="utf-8") as file:
 
 # --- 4. Проверки (Автотест) ---
 
-# Проверяем, что считались корректные данные
+# Убеждаемся, что запись и чтение совпали
+assert loaded_config == data_to_save
+
+# Проверяем, что считались корректные данные (более обширный вариант ассерта выше)
 assert loaded_config["base_url"] == "https://stage.example.com/api/v", (
     f"Ошибка: Неверный base_url! Должно быть: {loaded_config['base_url']}"
 )

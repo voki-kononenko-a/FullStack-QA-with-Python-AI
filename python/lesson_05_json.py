@@ -10,6 +10,7 @@ data_to_save = {
 }
 
 # file_name = "test_config.json"
+# .parent — кладет файл в папку python
 # .parent.parent — поднимется на уровень выше, чем python и положит файл в корень проекта qa-automation-course/
 file_name = Path(__file__).resolve().parent.parent / "test_config.json"
 

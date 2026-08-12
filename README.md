@@ -5,7 +5,7 @@
 https://github.com/voki-kononenko-a/FullStack-QA-with-Python-AI/tree/studies/develop
 
 Запуск файла (перед этим ОБЯЗАТЕЛЬНО сохранить):
-python python/lesson_04_basics.py
+python python/lesson_05_json.py
 
 Команды для пушей:
 git add .  - добавляет все

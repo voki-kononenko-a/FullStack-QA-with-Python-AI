@@ -1,9 +1,10 @@
 import json
 from pathlib import Path
+import pytest
 
 try:
     # Пробуем выполнить опасный код
-    with open("config.json", "r") as f: # ошибка, поскольку такого файла нет. НО при этом тест не упадет, а выведет сообщение
+    with open("config.json", "r", encoding="utf-8") as f:  # ошибка, поскольку такого файла нет. НО при этом тест не упадет, а выведет сообщение
         data = f.read()
 except FileNotFoundError:
     # Этот блок сработает ТОЛЬКО если файла не существует
@@ -17,25 +18,25 @@ try:
         config = json.load(f)
     print("Файл конфигурации успешно загружен!")
 except FileNotFoundError:
-    print("⚠️ Файл не найден! Используем тестовые настройки по умолчанию.")
+    print("[WARNING] Файл не найден! Используем тестовые настройки по умолчанию.")
     config = {"base_url": "https://default-stage.com", "timeout": 5}
 
 # Дальше автотест работает с переменной config независимо от того, был файл или нет
 assert config["timeout"] > 0, "Ошибка: timeout должен быть больше 0"
 
-raw_response_code = "200_OK"  # Имитация некорректного ответа от API
+raw_response_code = "200_OK"  # Имитация некорректного ответа от API 
 
 try:
-    # Пробуем перевести строку в целое число
+# Пробуем перевести строку в целое число
     status_code = int(raw_response_code)
-except ValueError as e:
-    # Ловим ошибку конвертации и выводим понятный лог
-    print(f"⚠️ Не удалось привести status_code к числу. Ошибка: {e}")
-    status_code = 0  # Присваиваем дефолтное значение
+except (ValueError, TypeError) as e:
+# Не маскируем ошибку, а явно роняем тест с информативным сообщением
+    pytest.fail(f"БАК API: Сервер прислал валидационный код в неверном формате '{raw_response_code}'. Ошибка: {e}")
 
+# До этой строки код дойдёт ТОЛЬКО если конвертация прошла успешно
 assert status_code == 200, f"Тест упал: ожидался код 200, но получили {status_code}"
 
-# пробуем выполнить код
+# Пробуем выполнить код
 try:
     print("1. Подключаемся к базе данных автотестов...")
     connection_status = True

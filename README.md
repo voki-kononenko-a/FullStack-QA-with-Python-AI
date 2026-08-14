@@ -6,6 +6,7 @@ https://github.com/voki-kononenko-a/FullStack-QA-with-Python-AI/tree/studies/dev
 
 Запуск файла (перед этим ОБЯЗАТЕЛЬНО сохранить):
 python python/lesson_06_errors.py
+python python/project/tests/test_data_cleaner.py
 
 Команды для пушей:
 git add .  - добавляет все
@@ -30,3 +31,8 @@ git pull origin main
 git checkout studies/develop
 
 Ctrl + L - прикрепление файла (с привязкой к строкам) к промпту
+
+Скачать главную библиотеку Python для отправки HTTP-запросов к API (GET, POST, PUT, DELETE). 
+Создать файл requirements.txt в папке project (в начале работы с проектом)
+pip install requests pytest
+pip freeze > python/project/requirements.txt

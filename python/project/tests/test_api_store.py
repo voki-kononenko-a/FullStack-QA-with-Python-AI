@@ -6,14 +6,6 @@ import requests
 # response = requests.get("https://jsonplaceholder.typicode.com/posts/1")
 # print(dir(response))
 
-# --- 1. Фикстура (Setup / Teardown) ---
-
-@pytest.fixture
-def base_url():
-    """Фикстура возвращает базовый URL для API."""
-    return "https://jsonplaceholder.typicode.com"
-
-
 # --- 2. Параметризованный автотест ---
 
 @pytest.mark.parametrize("post_id, expected_title_keyword", [

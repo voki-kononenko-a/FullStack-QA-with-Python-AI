@@ -36,3 +36,6 @@ Ctrl + L - прикрепление файла (с привязкой к стр�
 Создать файл requirements.txt в папке project (в начале работы с проектом)
 pip install requests pytest
 pip freeze > python/project/requirements.txt
+
+Запуск теста через pytest с ключами подробного вывода -v (verbose — подробный лог) и -s (показывать print в консоли):
+pytest python/project/tests/test_api_store.py -v

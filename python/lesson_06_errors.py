@@ -19,7 +19,8 @@ try:
     print("Файл конфигурации успешно загружен!")
 except FileNotFoundError:
     print("[WARNING] Файл не найден! Используем тестовые настройки по умолчанию.")
-    config = {"base_url": "https://default-stage.com", "timeout": 5}
+    
+config = {"base_url": "https://default-stage.com", "timeout": 5}
 
 # Дальше автотест работает с переменной config независимо от того, был файл или нет
 assert config["timeout"] > 0, "Ошибка: timeout должен быть больше 0"
@@ -39,11 +40,13 @@ assert status_code == 200, f"Тест упал: ожидался код 200, н�
 # Пробуем выполнить код
 try:
     print("1. Подключаемся к базе данных автотестов...")
-    connection_status = True
+    connection_status = False
     assert connection_status is True, "Ошибка соединения!"
 # except — срабатывает ТОЛЬКО при возникновении ошибки.
 except AssertionError as err:
     print(f"2. Произошла ошибка: {err}")
+    # Ключевое слово raise повторно выбрасывает ошибку, чтобы тест УПАЛ! Если его убрать, ошибка не отобразится
+    raise
 # else — срабатывает ТОЛЬКО если код в try прошёл БЕЗ ошибок.
 else:
     print("2. Подключение прошло успешно, выполняем SQL-запрос.")

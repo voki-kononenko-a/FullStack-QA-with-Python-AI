@@ -4,7 +4,7 @@ def clean_authorization_token(raw_header: str) -> str:
     """Очищает заголовок авторизации от лишних пробелов и префиксов.
     Использует методы .strip() и .replace()
     """
-    # .strip() удаляет пробелы и переносы '\n' в начале и конце строки
+    # .strip() удаляет пробелы, табы и переносы '\n' в начале и конце строки
     cleaned = raw_header.strip()
     
     # .replace("Bearer ", "") удаляет подстроку "Bearer "

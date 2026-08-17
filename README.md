@@ -39,3 +39,13 @@ pip freeze > python/project/requirements.txt
 
 Запуск теста через pytest с ключами подробного вывода -v (verbose — подробный лог) и -s (показывать print в консоли):
 pytest python/project/tests/test_api_store.py -v
+
+Запуск проверок после выноса фикстуры в conftest.py(запускает все тесты):
+cd python/project
+pytest
+
+Шпаргалка для перемещения по уровням через терминал:
+cd .. — подняться на один уровень вверх (назад).
+cd ../.. — подняться на два уровня вверх.
+cd name_of_folder — зайти в папку name_of_folder.
+cd / или cd ~ — перейти в корневую или домашнюю директорию.

@@ -1,5 +1,6 @@
 import pytest
 import requests
+from utils.schemas import PostSchema
 
 # Помечаем тест маркерами smoke и api
 @pytest.mark.smoke
@@ -46,3 +47,19 @@ def test_get_posts_parametrized(base_url, post_id, expected_title_keyword):
         f"Слово '{expected_title_keyword}' не найдено в title поста №{post_id}"
     )
     
+# Новый тест для проверки контракта API (схемы - файл utils/schemas.py)
+@pytest.mark.api
+@pytest.mark.regression
+def test_post_schema_validation(base_url):
+    """Проверяем, что ответ сервера строго соответствует схеме Pydantic."""
+    response = requests.get(f"{base_url}/posts/1")
+    assert response.status_code == 200
+    
+    # Валидация: передаем парсенный JSON в модель - благодаря ** не нужно извлекать каждый ключ вручную
+    # Если типы полей не совпадут, Pydantic выброситValidationError и тест упадёт
+    validated_post = PostSchema(**response.json())
+    
+    # Благодаря Pydantic мы теперь можем обращаться к полям словаря через точку с подсказками IDE!
+    assert validated_post.id == 1
+    # isinstance(значение, тип) - является ли переданное значение указанным типом данных?
+    assert isinstance(validated_post.title, str)

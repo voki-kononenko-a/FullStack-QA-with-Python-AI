@@ -49,3 +49,21 @@ cd .. — подняться на один уровень вверх (назад
 cd ../.. — подняться на два уровня вверх.
 cd name_of_folder — зайти в папку name_of_folder.
 cd / или cd ~ — перейти в корневую или домашнюю директорию.
+
+Установка плагина для генерации файла с отчётом:
+pip install pytest-html
+
+Обновление requirements.txt после установки плагинов:
+pip freeze > python/project/requirements.txt
+
+Запуск тестов по маркировкам:
+pytest -m smoke - smoke можно менять на любую другую маркировку, и запустится фикстура с этим маркером
+
+Генерация HTML-файла с отчетом:
+pytest --html=report.html
+Запустить только smoke и сгенерировать отчёт:
+pytest -m smoke --html=report.html
+Запустить всё, КРОМЕ smoke (через not):
+pytest -m "not smoke"
+Запустить тесты, у которых есть И smoke, И api:
+pytest -m "smoke and api"

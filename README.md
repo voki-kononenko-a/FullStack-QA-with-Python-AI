@@ -67,3 +67,8 @@ pytest -m smoke --html=report.html
 pytest -m "not smoke"
 Запустить тесты, у которых есть И smoke, И api:
 pytest -m "smoke and api"
+
+Запуск теста с параметрами из командной строки - файл conftest.py:
+pytest - обычный запуск. По умолчанию будет выбран qa
+pytest --env=qa - запуск qa окружения
+pytest --env=dev - запуск dev окружения. Сейчас падает с ошибкой, т.к. нет такой ссылки в инете

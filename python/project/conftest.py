@@ -38,3 +38,8 @@ def base_url(request) -> str:
 
     # Возвращаем URL для выбранного env (по умолчанию qa)
     return env_urls.get(env, env_urls["qa"])
+    
+@pytest.fixture
+def default_player_stats():
+    return {"hp": 100, "mana": 50, "level": 1}
+    

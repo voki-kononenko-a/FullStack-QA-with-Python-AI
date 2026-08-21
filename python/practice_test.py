@@ -10,7 +10,7 @@ def validate_endpoints_sla(endpoints_data: dict, max_sla_seconds: float = 1.5):
 services_metrics = {
     "/api/v1/auth": 0.45,
     "/api/v1/catalog": 1.20,
-    "/api/v1/checkout": 1.85,
+    "/api/v1/checkout": 1.5,
     "/api/v1/health": 0.10
 }
 
